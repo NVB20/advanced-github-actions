@@ -2,8 +2,8 @@ name: push-new-image-dockerhub
 run-name: push new image to docker hub
 on:
   push:
-    paths:
-      - Dockerfile
+    branches:
+      - main
 jobs:
   push-image:
     runs-on: ubuntu-latest
