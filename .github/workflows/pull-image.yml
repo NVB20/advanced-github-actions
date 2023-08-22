@@ -23,5 +23,9 @@ jobs:
         
         - name: pull and show
           run: |
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/custom-action:${{ github.sha }}
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/custom-actions:${{ github.sha }}
             docker images
+
+        - name: docker run
+          run: |
+              docker run ${{ secrets.DOCKERHUB_USERNAME }}/custom-actions:${{ github.sha }}
