@@ -1,9 +1,10 @@
-name: push-new-image-dockerhub
-run-name: push new image to docker hub
+name: pull-image-from-dockerhub
+run-name: pull new image from docker hub
 on:
-  push:
-    paths:
-      - Dockerfile
+    workflow_run:
+        workflows: ["push-new-iamge"]
+        types:
+          - completed
 jobs:
   push-image:
     runs-on: ubuntu-latest
@@ -19,12 +20,8 @@ jobs:
           with:
             username: ${{ secrets.DOCKERHUB_USERNAME }}
             password: ${{ secrets.DOCKERHUB_TOKEN }}
-        -
-            name: Build and push
-            uses: docker/build-push-action@v4
-            with:
-                push: true
-                tags:  ${{ secrets.DOCKERHUB_USERNAME }}/custom-actions:${{ github.sha }}
-
-    outputs:
-      workflow-completed: ${{ steps.build.outputs.workflow-completed }}
+        
+        - name: pull and run
+          run: |
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/custom-action:${{ github.sha }}
+            docker run ${{ secrets.DOCKERHUB_USERNAME }}/custom-action:${{ github.sha }}
