@@ -26,6 +26,4 @@ jobs:
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/custom-actions:${{ github.sha }}
             docker images
 
-        - name: docker run
-          run: |
-              docker run ${{ secrets.DOCKERHUB_USERNAME }}/custom-actions:${{ github.sha }}
+        
