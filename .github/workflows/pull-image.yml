@@ -2,7 +2,7 @@ name: pull-image-from-dockerhub
 run-name: pull new image from docker hub
 on:
     workflow_run:
-        workflows: ["push-new-image.yml"]
+        workflows: ["push-new-image-dockerhub"]
         types:
           - completed
 jobs:
