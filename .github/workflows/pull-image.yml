@@ -6,7 +6,7 @@ on:
         types:
           - completed
 jobs:
-  push-image:
+  pull-image:
     runs-on: ubuntu-latest
     steps:
         - name: Set up QEMU (docker in docker)
@@ -21,7 +21,7 @@ jobs:
             username: ${{ secrets.DOCKERHUB_USERNAME }}
             password: ${{ secrets.DOCKERHUB_TOKEN }}
         
-        - name: pull and run
+        - name: pull and show
           run: |
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/custom-action:${{ github.sha }}
-            docker run ${{ secrets.DOCKERHUB_USERNAME }}/custom-action:${{ github.sha }}
+            docker images
